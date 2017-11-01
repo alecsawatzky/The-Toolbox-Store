@@ -1,3 +1,3 @@
 ActiveAdmin.register Category do
-    permit_params :name, :descripton
+    permit_params :name, :description
 end
