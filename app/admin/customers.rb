@@ -1,3 +1,3 @@
 ActiveAdmin.register Customer do
-    permit_params :stripe_customer_id
+    permit_params :stripe_customer_number
 end
