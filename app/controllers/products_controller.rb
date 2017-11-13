@@ -7,5 +7,6 @@ class ProductsController < ApplicationController
   end
 
   def sale
+    @sale_items = SaleProduct.all
   end
 end

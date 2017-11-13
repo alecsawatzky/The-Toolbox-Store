@@ -1,2 +1,15 @@
-h1 Products#sale
-p Find me in app/views/products/sale.html.slim
+h1 Sale Products
+.card-columns
+ - @sale_items.each do |item|
+  .card
+    .card-body
+        h4.card-title
+        = item.product.name
+        h3.card_text
+        = item.discount_percent
+        |  % off
+    - if item.product.image.present?
+        = image_tag item.product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
+    .card-body
+        p.card_text
+        = item.product.description
