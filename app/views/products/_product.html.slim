@@ -1,0 +1,7 @@
+.product
+  h4= product.name
+  - if product.image.present?
+   p
+    = image_tag product.image.name
+  p
+    = product.description
