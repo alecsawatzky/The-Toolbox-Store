@@ -1,7 +1,10 @@
-.product
-  h4= product.name
+.card
+  .card-block
+    h4.card-title
+      = product.name
   - if product.image.present?
-   p
-    = image_tag product.image.name
-  p
-    = product.description
+    = image_tag product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
+  .card-block
+    p.card_text
+      = product.description
+      
