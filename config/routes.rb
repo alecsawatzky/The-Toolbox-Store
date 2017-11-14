@@ -13,6 +13,4 @@ Rails.application.routes.draw do
   
   get '/products/sale', to: 'products#sale', as: 'sale'
 
-  get '/products/search', to: 'products#search', as: 'search'
-
 end

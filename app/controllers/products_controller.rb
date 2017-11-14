@@ -9,8 +9,4 @@ class ProductsController < ApplicationController
   def sale
     @sale_items = SaleProduct.all
   end
-
-  def search
-    @search_results = Product.where("name LIKE '%#{params[:search]}%'")
-  end
 end
