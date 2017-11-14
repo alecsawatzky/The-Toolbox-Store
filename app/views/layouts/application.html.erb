@@ -1,52 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>TheToolboxStore</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-   
-  <body>
-    <nav class="navbar navbar-expand" style="background-color: #020f18;">
-      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <a class="navbar-brand" href="#">The Toolbox Store</a>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href=<%= root_path %>>Home<span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href=<%= sale_path %>>Sale</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-        </ul>
-        <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Dropdown
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-    <button class="dropdown-item" type="button">Action</button>
-    <button class="dropdown-item" type="button">Another action</button>
-    <button class="dropdown-item" type="button">Something else here</button>
-  </div>
-</div>
-        
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+   <head>
+      <title>TheToolboxStore</title>
+      <%= csrf_meta_tags %>
+      
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+   </head>
+   <body>
+      <nav class="navbar navbar-expand" style="background-color: #020f18;">
+         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+         <span class="navbar-toggler-icon"></span>
+         </button>
+         <a class="navbar-brand" href="#">The Toolbox Store</a>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item active">
+                  <a class="nav-link" href=<%= root_path %>>Home<span class="sr-only">(current)</span></a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href=<%= sale_path %>>Sale</a>
+               </li>
+               <li class="nav-item">
+                  <a class="nav-link" href="#">About</a>
+               </li>
+            </ul>
+            <div class="dropdown">
+               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Dropdown
+               </button>
+               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <% @categories.each do |category|%>
+                  <button class="dropdown-item" type="button"><%= category.name %></button>
+                  <% end %>
+               </div>
+            </div>
+            <%= form_tag(root_path, :method => "get", id: "search-form", class:"form-inline my-2 my-lg-0") do %>
+            <%= text_field_tag(:search, params[:search], placeholder: "Search Posts", class: "form-control mr-sm-2") %>
+            <%= submit_tag("Search", class: "btn btn-outline-success my-2 my-sm-0") %>
+            <% end %>
+         </div>
+      </nav>
+      <div class="container">
+         <%= yield %>
       </div>
-    </nav>
-    
-    <div class="container">
-    <%= yield %>
-    </div>
-  </body>
+   </body>
 </html>
