@@ -15,6 +15,10 @@ class ProductsController < ApplicationController
   end
 
   def filter
-    @filter_results = Product.where("category_id == '#{params[:filter]}'")
+    if params[:commit] == "Filter"
+      @filter_results = Product.where("category_id == '#{params[:filter]}'")
+    else
+      @filter_results = Product.all
+    end
   end
 end
