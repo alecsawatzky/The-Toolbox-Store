@@ -1,7 +1,8 @@
 h1 Search Results
 - if @search_results.empty?
-   .no-results
-    P There was no product match.
+  .alert.alert-info role="alert" 
+    strong Sorry! 
+    | Your search description does not match any products.
 - else
   .card-columns
     = render @search_results
