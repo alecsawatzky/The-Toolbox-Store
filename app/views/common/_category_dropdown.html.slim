@@ -1,6 +1,4 @@
-.dropdown
-  button#dropdownMenu2.btn.btn-secondary.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" type="button" 
-    | Dropdown
-  .dropdown-menu aria-labelledby="dropdownMenu2" 
-    - @categories.each do |category|
-      button.dropdown-item type="button" = category.name
+.catgory-dropdown
+  = form_tag filter_path, method: 'get' do
+    = select_tag :filter, options_from_collection_for_select(@categories, 'id', 'name'), class: "form-control mr-sm-2"
+    = submit_tag 'Filter', class: "btn btn-outline-success my-2 my-sm-0"

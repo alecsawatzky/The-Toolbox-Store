@@ -1,0 +1,9 @@
+h1 Filtered Results
+= render partial: 'common/category_dropdown'
+- if @filter_results.empty?
+  .alert.alert-info role="alert" 
+    strong Sorry! 
+    | Your search description does not match any products.
+- else
+  .card-columns
+    = render @filter_results

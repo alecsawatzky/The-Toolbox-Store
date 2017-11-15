@@ -15,4 +15,6 @@ Rails.application.routes.draw do
 
   get '/products/search', to: 'products#search', as: 'search'
 
+  get '/products/filter', to: 'products#filter', as: 'filter'
+
 end
