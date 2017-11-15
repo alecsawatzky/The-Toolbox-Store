@@ -1,3 +1,7 @@
 h1 Search Results
-.card-columns
-  = render @search_results
+- if @search_results.empty?
+   .no-results
+    P There was no product match.
+- else
+  .card-columns
+    = render @search_results
