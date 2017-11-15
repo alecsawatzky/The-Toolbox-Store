@@ -27,6 +27,7 @@
             </ul>
             </div>
             <%= form_tag(search_path, :method => "get", id: "search-form", class:"form-inline my-2 my-lg-0") do %>
+            <%= select_tag :filter, options_from_collection_for_select(@categories, 'id', 'name', 0), class: "form-control mr-sm-2", :include_blank => 'Shop by Category' %>
             <%= text_field_tag(:search, params[:search], placeholder: "Search Products", class: "form-control mr-sm-2") %>
             <%= submit_tag("Search", class: "btn btn-outline-success my-2 my-sm-0") %>
             <% end %>

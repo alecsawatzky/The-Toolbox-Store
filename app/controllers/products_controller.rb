@@ -11,7 +11,11 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @search_results = Product.where("name LIKE '%#{params[:search]}%'")
+    if params[:filter].empty?
+      @search_results = Product.where("name LIKE '%#{params[:search]}%'")
+    else
+      @search_results = Product.where("name LIKE '%#{params[:search]}%' AND category_id == '#{params[:filter]}'")
+    end
   end
 
   def filter
