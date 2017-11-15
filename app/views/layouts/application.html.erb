@@ -25,15 +25,6 @@
                   <a class="nav-link" href="#">About</a>
                </li>
             </ul>
-            <div class="dropdown">
-               <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               Dropdown
-               </button>
-               <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                  <% @categories.each do |category|%>
-                  <button class="dropdown-item" type="button"><%= category.name %></button>
-                  <% end %>
-               </div>
             </div>
             <%= form_tag(search_path, :method => "get", id: "search-form", class:"form-inline my-2 my-lg-0") do %>
             <%= text_field_tag(:search, params[:search], placeholder: "Search Products", class: "form-control mr-sm-2") %>
