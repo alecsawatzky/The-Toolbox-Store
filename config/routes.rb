@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   
   get '/products/new', to: 'products#new', as: 'new'
 
+  get '/product/:id', to: 'products#show', as: 'show', id: /\d+/
+
   get '/products/search', to: 'products#search', as: 'search'
 
   get '/products/filter', to: 'products#filter', as: 'filter'

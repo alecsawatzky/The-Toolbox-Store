@@ -1,0 +1,11 @@
+h1 Product
+.card-columns
+  .card
+    .card-body
+      h4.card-title
+        = @product.name
+    - if @product.image.present?
+      = image_tag @product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
+    .card-body
+      p.card_text
+        = @product.description
