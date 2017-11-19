@@ -24,3 +24,18 @@
     position: absolute;
     color: #f5f1ee;
   }
+  
+  // Show page.
+  .service1-item > img {
+    max-height: 110px;
+    max-width: 110px;
+    opacity: 0.6;
+    transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -moz-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+  }
+  
+  .service-image-left > center > img{
+    max-height: 400px;
+  }

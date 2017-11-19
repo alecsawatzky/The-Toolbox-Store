@@ -1,11 +1,26 @@
-h1 Product
-.card-columns
-  .card
-    .card-body
-      h4.card-title
-        = @product.name
-    - if @product.image.present?
-      = image_tag @product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
-    .card-body
-      p.card_text
-        = @product.description
+h1 View Product
+.container-fluid
+  .content-wrapper
+    .item-container
+      .container
+        .col-md-12
+          .product.col-md-3.service-image-left
+            center
+              = image_tag @product.image.name, class: "item-display"
+        .col-md-7
+          .product-title 
+            = @product.name
+          .product-desc
+            = @product.description
+          hr/  
+          .product-price
+            | $ #{@product.price}
+          - if @product.stock_quantity > 0
+            .product-stock In Stock
+          -else
+            .product-stock Out of Stock
+          hr/
+          .btn-group.cart
+            = form_tag root_path, method: 'get' do
+              = submit_tag :filter, class: "btn btn-success", name:"commit", value:"Add to cart"
+
