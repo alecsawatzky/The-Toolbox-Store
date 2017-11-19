@@ -10,6 +10,10 @@ class ProductsController < ApplicationController
     @sale_items = SaleProduct.all
   end
 
+  def new
+    @new_items = Product.where(:new => true)
+  end
+
   def search
     if params[:filter].empty?
       redirect_to action: "index"

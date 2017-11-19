@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   root to: "products#index", as: 'root'
   
   get '/products/sale', to: 'products#sale', as: 'sale'
+  
+  get '/products/new', to: 'products#new', as: 'new'
 
   get '/products/search', to: 'products#search', as: 'search'
 
