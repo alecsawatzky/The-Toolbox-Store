@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
 
   def search
     if params[:filter].empty?
-      @search_results = Product.where("name LIKE '%#{params[:search]}%'")
+      redirect_to action: "index"
     else
       @search_results = Product.where("name LIKE '%#{params[:search]}%' AND category_id == '#{params[:filter]}'")
     end
@@ -21,8 +21,6 @@ class ProductsController < ApplicationController
   def filter
     if params[:commit] == "Filter"
       @filter_results = Product.where("category_id == '#{params[:filter]}'").order(:name)
-    else
-      @filter_results = Product.all
     end
   end
 end
