@@ -2,4 +2,5 @@
   = form_tag filter_path, method: 'get' do
     = select_tag :filter, options_from_collection_for_select(@categories, 'id', 'name'), class: "form-control mr-sm-2"
     = submit_tag :filter, class: "btn btn-outline-success my-2 my-sm-0",  name:"commit", value:"Filter"
+  = form_tag root_path, method: 'get' do
     = submit_tag :filter, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"Clear Filter"
