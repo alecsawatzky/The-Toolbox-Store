@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101034817) do
+ActiveRecord::Schema.define(version: 20171119200639) do
+
+  create_table "Products", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.decimal "price"
+    t.integer "stock_quantity"
+    t.integer "category_id"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "new"
+  end
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -74,17 +86,6 @@ ActiveRecord::Schema.define(version: 20171101034817) do
     t.decimal "hst_rate"
     t.integer "customer_id"
     t.decimal "discount"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.decimal "price"
-    t.integer "stock_quantity"
-    t.integer "category_id"
-    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
