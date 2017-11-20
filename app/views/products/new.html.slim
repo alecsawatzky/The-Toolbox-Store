@@ -1,3 +1,4 @@
-h1 New Products
+h1 
+  = "New Product".pluralize(@new_items.size)
 .card-columns
   = render @new_items
