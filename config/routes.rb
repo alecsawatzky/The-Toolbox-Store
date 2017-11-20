@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :products, only: [:index] do
     member do
     post :add_to_cart
+    post :edit_quantity
     get :cart
     end
   end

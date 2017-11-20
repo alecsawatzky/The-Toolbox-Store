@@ -40,8 +40,25 @@ class ProductsController < ApplicationController
    def add_to_cart
     id = params[:id].to_i;
     session[:cart] << id
-    redirect_to root_url
+    redirect_to cart_url
    end
+
+   def edit_quantity
+    id = params[:id].to_i
+
+    if params[:commit] == "+"
+      session[:cart] << id
+    elsif params[:commit] == "-"
+      if session[:cart].count(id) > 1
+        session[:cart].delete_at(session[:cart].index(id) || session[:cart].length)
+      end  
+    else
+      session[:cart].delete(id)
+    end
+    redirect_to cart_url
+   end
+
+  
 
   private 
 
