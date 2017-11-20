@@ -43,6 +43,7 @@ class ProductsController < ApplicationController
     id = params[:id].to_i;
     session[:cart] << id
     redirect_to cart_url
+    flash[:notice] = "1 item added to cart"
    end
 
    def edit_quantity
@@ -59,8 +60,6 @@ class ProductsController < ApplicationController
     end
     redirect_to cart_url
    end
-
-  
 
   private 
 
