@@ -34,6 +34,8 @@ class ProductsController < ApplicationController
   def filter
     if params[:commit] == "Filter"
       @filter_results = Product.where("category_id == '#{params[:filter]}'").order(:name)
+    else
+      redirect_to root_url
     end
   end
 
