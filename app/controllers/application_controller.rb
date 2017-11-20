@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   private
   def load_categories
-    @categories = Category.all
+     @category_list = Category.all
   end
 
 end
