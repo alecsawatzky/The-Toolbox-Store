@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  get 'products/index'
 
-  get 'products/category'
-
-  get 'products/sale'
+  resources :products, only: [:index] do
+    member do
+    post :add_to_cart
+    get :cart
+    end
+  end
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -11,6 +13,8 @@ Rails.application.routes.draw do
 
   root to: "products#index", as: 'root'
   
+  get '/products/cart', to: 'products#cart', as: 'cart'
+
   get '/products/sale', to: 'products#sale', as: 'sale'
   
   get '/products/new', to: 'products#new', as: 'new'

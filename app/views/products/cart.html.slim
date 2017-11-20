@@ -1,0 +1,17 @@
+h1 Cart
+.card-columns
+ - @items_in_cart.each do |product|
+  .card
+    .card-body
+      h4.card-title
+        = product.name
+        
+    - if product.image.present?
+      = image_tag product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
+    .card-body
+      p.card_text
+        = product.description
+      p.card_text
+        | Price: $ #{product.price}
+      p.card_text
+        | Order Quantity: #{@product_id_list.count(product.id)}
