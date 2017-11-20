@@ -21,6 +21,6 @@ h1 View Product
             .product-stock Out of Stock
           hr/
           .btn-group.cart
-            = form_tag root_path, method: 'get' do
-              = submit_tag :filter, class: "btn btn-success", name:"commit", value:"Add to cart"
+            = form_tag add_to_cart_product_path(@product), method: 'post' do
+              = submit_tag "Add to cart", class: "btn btn-success"
 
