@@ -6,7 +6,8 @@ h1 View Product
         .col-md-12
           .product.col-md-3.service-image-left
             center
-              = image_tag @product.image.name, class: "item-display"
+              - if @product.image.present?
+                = image_tag @product.image.name, class: "item-display"
         .col-md-7
           .product-title 
             = @product.name

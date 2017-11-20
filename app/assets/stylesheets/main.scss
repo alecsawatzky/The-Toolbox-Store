@@ -14,6 +14,16 @@
     }
 }
 
+.card-columns a
+{
+  color: black;
+}
+
+.card-columns a:hover
+{
+  color: grey;
+}
+
 .card-columns {
     @include media-breakpoint-only(lg) {
       column-count: 3;
