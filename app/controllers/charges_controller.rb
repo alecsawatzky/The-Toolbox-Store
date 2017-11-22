@@ -7,29 +7,23 @@ class ChargesController < ApplicationController
   def create
     # Amount in cents
     @amount = 500
+    @current_customer = current_customer
 
-    if Customer.where(:email =>  params[:stripeEmail]).empty?
-      @customer = Stripe::Customer.create(email: params[:stripeEmail],
-                                          name: params[:stripeBillingName],
+    logger.debug("get the customer. #{current_customer.inspect}")
+
+    if @current_customer.stripe_identifier.blank?
+      @customer = Stripe::Customer.create(email: @current_customer.email,
                                           source: params[:stripeToken])
+
+      @current_customer.stripe_identifier = @customer.id
+      @current_customer.save
 
       @charge = Stripe::Charge.create(customer: @customer.id,
                                       amount: @amount,
                                       description: 'Rails Stripe customer',
                                       currency: 'cad')
-
-      logger.debug("Create the customer. #{@customer.inspect}")
-
-      new_customer =  Customer.create(:stripe_identifier => @customer.id,
-                                      # :name  => @customer.name,
-                                      :email =>  @customer.email,
-                                      :province_id => session[:province])
-
-      logger.debug("Create the customer. #{new_customer.errors.messages.inspect}")
     else
-      @customer = Customer.where(:email =>  params[:stripeEmail]).first
-
-      @charge = Stripe::Charge.create(customer: @customer.stripe_identifier,
+      @charge = Stripe::Charge.create(customer: @current_customer.stripe_identifier,
                                       amount: @amount,
                                       description: 'Rails Stripe customer',
                                       currency: 'cad')
@@ -41,5 +35,9 @@ class ChargesController < ApplicationController
     if @charge.paid && @charge.amount == amount
       # order = Order.create()
     end
+  end
+
+  def current_customer
+    @current_customer ||= Customer.find_by(id: session[:customer_id])
   end
 end
