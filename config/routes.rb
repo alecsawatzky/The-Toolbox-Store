@@ -30,6 +30,12 @@ Rails.application.routes.draw do
 
   root to: "products#index", as: 'root'
   
+  get '/authentication/create', to: 'authentication#create', as: 'create'
+ 
+  get 'authentication/authenticate', to: 'authentication#authenticate', as: 'authenticate'
+
+  get 'authentication/login', to: 'authentication#login', as: 'login'
+
   get '/products/cart', to: 'products#cart', as: 'cart'
 
   get '/products/sale', to: 'products#sale', as: 'sale'

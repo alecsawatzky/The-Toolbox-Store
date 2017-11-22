@@ -14,7 +14,6 @@ class ProductsController < ApplicationController
     @items_in_cart = Product.find(session[:cart])
     @product_id_list = session[:cart]
     @product = Product.find(1)
-    @provinces = Province.all
     
     @amount = 500
   end

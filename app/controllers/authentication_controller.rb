@@ -12,6 +12,7 @@ class AuthenticationController < ApplicationController
     if @customer.present?
       if @customer.password == params[:password]
         redirect_to root_url
+        session[:customer_id] = @customer.id
       else
         render :login
       end
@@ -36,7 +37,7 @@ class AuthenticationController < ApplicationController
     logger.debug("Create the customer. #{@customer.inspect}")
 
     if @customer.save
-      cookies.signed[:customer_id] = @customer.id
+      session[:customer_id] = @customer.id
       redirect_to cart_path
     else
       render :sign_up

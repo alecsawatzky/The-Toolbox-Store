@@ -10,20 +10,20 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   
-    helper_method :account_signed_in?, :current_account
+    helper_method :customer_signed_in?, :current_customer
   
     protected
   
-    def authenticate_account
-      cookies.delete(:account_id) && redirect_to(root_url) if current_account.blank?
+    def authenticate_customer
+      cookies.delete(:customer_id) && redirect_to(root_url) if current_customer.blank?
     end
   
-    def current_account
-      @current_account ||= Account.find_by(id: cookies.signed[:account_id])
+    def current_customer
+      @current_customer ||= Customer.find_by(id: session[:customer_id])
     end
   
-    def account_signed_in?
-      current_account.present?
+    def customer_signed_in?
+      current_customer.present?
     end
 
 end
