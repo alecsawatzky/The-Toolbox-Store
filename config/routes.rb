@@ -4,6 +4,10 @@ Rails.application.routes.draw do
 
   get 'authentication/sign_up'
 
+  post 'authentication/authenticate'
+
+  post 'authentication/create'
+
   resources :products, only: [:index] do
     member do
       post :add_to_cart
@@ -15,7 +19,10 @@ Rails.application.routes.draw do
 
   resources :charges, only: [:new, :create]
 
-  resources :authentication
+  resources :authentication, only: [:authenticate]
+
+
+
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

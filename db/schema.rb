@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171122030229) do
+ActiveRecord::Schema.define(version: 20171122154821) do
 
   create_table "Products", force: :cascade do |t|
     t.string "name"
@@ -68,7 +68,6 @@ ActiveRecord::Schema.define(version: 20171122030229) do
     t.string "email"
     t.string "name"
     t.string "stripe_identifier"
-    t.string "password_digest"
     t.integer "province_id"
     t.index ["province_id"], name: "index_customers_on_province_id"
   end
