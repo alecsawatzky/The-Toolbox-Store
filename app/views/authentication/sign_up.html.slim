@@ -1,7 +1,6 @@
 h1 Sign up
-= form_tag authentication_create_path, method: 'post' do
-    = bootstrap_form_for(:params) do |f|
-        / = f.select :province, options_from_collection_for_select(@provinces, 'id', 'name')
-        = f.email_field :email, class: "input-lg"
-        = f.password_field :password, class: "input-lg"
-        = f.submit "Create account", class: "btn btn-block btn-lg btn-primary"
+= bootstrap_form_tag url: '/authentication/create' do |f|
+  = f.select :province, options_from_collection_for_select(@provinces, 'id', 'name')
+  = f.email_field :email, value: 'name@example.com'
+  = f.password_field :password, class: "input-lg"
+  = f.submit "Create account", class: "btn btn-block btn-lg btn-primary"

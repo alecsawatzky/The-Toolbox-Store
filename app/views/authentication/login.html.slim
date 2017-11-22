@@ -1,7 +1,6 @@
 h1 Authentication#login
-= form_tag authentication_authenticate_path, method: 'post' do
-    = bootstrap_form_for(:account) do |f|
-        = f.email_field :email
-        = f.password_field :password
-        = f.check_box :remember_me
-        = f.submit "Log In"
+= bootstrap_form_tag url: '/authentication/authenticate' do |f|
+  = f.email_field :email, value: 'name@example.com'
+  = f.password_field :password, class: "input-lg"
+  = f.submit "Log in", class: "btn btn-block btn-lg btn-primary"
+

@@ -1,10 +1,19 @@
+
+require 'bcrypt'
 class Customer < ApplicationRecord
     has_many :orders
     belongs_to :province
-    validates :email, presence: true
+    # validates :email, presence: true
     # has_secure_password
 
-    def name
-        email
-    end
+    include BCrypt
+    
+      def password
+        @password ||= Password.new(password_hash)
+      end
+    
+      def password=(new_password)
+        @password = Password.create(new_password)
+        self.password_hash = @password
+      end
 end

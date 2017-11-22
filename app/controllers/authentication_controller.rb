@@ -1,20 +1,23 @@
 class AuthenticationController < ApplicationController
-  
+  require 'bcrypt'
   skip_before_action :verify_authenticity_token
-  
-  def login
 
+  def login
   end
 
   def authenticate
-    @customer = Customer.find_by("LOWER(email) = ?", params[:email].downcase)
-    
-      if @customer.present? && @customer.authenticate(params[:password])
-        cookies.permanent.signed[:customer_id] = @customer.id
+    @customer = Customer.find_by_email(params[:email])
+    logger.debug("get the customer. #{@customer.inspect}")
+    logger.debug("The password. #{params[:password]}")
+    if @customer.present?
+      if @customer.password == params[:password]
         redirect_to root_url
       else
         render :login
       end
+    else
+      render :login
+    end
   end
 
   def sign_up
@@ -22,14 +25,15 @@ class AuthenticationController < ApplicationController
   end
 
   def create
-
     @province = Province.first
-   
-    @customer = Customer.new(:email => params[:email],
-                            # :password_digest => params[:password],
-                            :province_id => @province.id)
 
-      logger.debug("Create the customer. #{@customer.inspect}")       
+    @customer = Customer.new()
+
+    @customer.email = params[:email]
+    @customer.password = params[:password]
+    @customer.province_id = @province.id
+
+    logger.debug("Create the customer. #{@customer.inspect}")
 
     if @customer.save
       cookies.signed[:customer_id] = @customer.id
@@ -38,10 +42,10 @@ class AuthenticationController < ApplicationController
       render :sign_up
     end
   end
-    
+
   def destroy
     cookies.delete(:customer_id)
     redirect_to root_url
   end
-  
+
 end
