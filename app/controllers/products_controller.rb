@@ -13,9 +13,6 @@ class ProductsController < ApplicationController
   def cart
     @items_in_cart = Product.find(session[:cart])
     @product_id_list = session[:cart]
-    @product = Product.find(1)
-    
-    @amount = 500
   end
 
   def checkout

@@ -5,6 +5,11 @@
   margin: 5px
 }
 
+.card-columns
+{
+  size: 10%;
+}
+
 @media (min-width:34em) {
     .card-deck > .card
     {

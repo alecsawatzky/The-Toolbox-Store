@@ -1,24 +1,27 @@
 h1 Shopping Cart
-= form_tag checkout_product_path(@items_in_cart), class:"form-inline my-2 my-lg-0", method: 'get' do
-  = submit_tag "Chekout", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
-.card-columns
- - @items_in_cart.each do |product|
-  .card
-    .card-body
-      h4.card-title
-        = product.name
-        
-    - if product.image.present?
-      = image_tag product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
-    .card-body
-      p.card_text
-        = product.description
-      p.card_text
-        | Price: $ #{product.price}
-      p.card_text
-        | Order Quantity: #{@product_id_list.count(product.id)}
-        = form_tag edit_quantity_product_path(product), method: 'post' do
-            = submit_tag :add, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"+"
-            = submit_tag :remove, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"-"
-    = form_tag edit_quantity_product_path(product), class:"form-inline my-2 my-lg-0", method: 'post' do
-        = submit_tag "Remove from cart", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
+- if @items_in_cart.size > 0
+  = form_tag checkout_product_path(@items_in_cart), class:"form-inline my-2 my-lg-0", method: 'get' do
+    = submit_tag "Chekout", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
+  .card-columns
+    - @items_in_cart.each do |product|
+      .card
+        .card-body
+          h4.card-title
+            = product.name
+        - if product.image.present?
+          = image_tag product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
+        .card-body
+          p.card_text
+            = product.description
+          p.card_text
+            | Price: $ #{product.price}
+          p.card_text
+            | Order Quantity: #{@product_id_list.count(product.id)}
+            = form_tag edit_quantity_product_path(product), method: 'post' do
+                = submit_tag :add, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"+"
+                = submit_tag :remove, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"-"
+        = form_tag edit_quantity_product_path(product), class:"form-inline my-2 my-lg-0", method: 'post' do
+            = submit_tag "Remove from cart", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
+- else
+  .alert.alert-info role="alert"  
+    | Your cart is empty.
