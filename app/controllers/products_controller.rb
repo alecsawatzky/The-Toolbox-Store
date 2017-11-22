@@ -13,6 +13,20 @@ class ProductsController < ApplicationController
   def cart
     @items_in_cart = Product.find(session[:cart])
     @product_id_list = session[:cart]
+    @product = Product.find(1)
+    @provinces = Province.all
+    
+    @amount = 500
+  end
+
+  def checkout
+    @items_in_cart = Product.find(session[:cart])
+    @product_id_list = session[:cart]
+    @product = Product.find(1)
+    
+    session[:province] = params[:province]
+
+    @amount = 500
   end
 
   def sale

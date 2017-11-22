@@ -1,4 +1,7 @@
 h1 Shopping Cart
+= form_tag checkout_product_path(@items_in_cart), class:"form-inline my-2 my-lg-0", method: 'get' do
+  = select_tag :province, options_from_collection_for_select(@provinces, 'id', 'name'), class: "form-control mr-sm-2"
+  = submit_tag "Chekout", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
 .card-columns
  - @items_in_cart.each do |product|
   .card

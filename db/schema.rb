@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171121031108) do
+ActiveRecord::Schema.define(version: 20171121205736) do
 
   create_table "Products", force: :cascade do |t|
     t.string "name"
@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20171121031108) do
   end
 
 # Could not dump table "customers" because of following StandardError
-#   Unknown type 'resource' for column 'province_id'
+#   Unknown type '' for column 'province_id'
 
   create_table "line_items", force: :cascade do |t|
     t.integer "quantity"
