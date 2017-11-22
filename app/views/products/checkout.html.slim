@@ -1,27 +1,35 @@
-.order-window
-  .container-right
-    .col-md-7
-      .product-title 
-        = @product.name
-      .product-desc
-        = @product.description
-      hr/  
-      .product-price
-        | $ #{@product.price}
-      - if @product.stock_quantity > 0
-        .product-stock In Stock
-      -else
-        .product-stock Out of Stock
-      hr/
-      .btn-group.cart
-        = form_tag cart_url, method: 'get' do
-          = submit_tag "Back to cart", class: "btn btn-success"
-        = form_tag charges_path do
-          article
-            - if flash[:error].present?
-              #error_explanation
-                p= flash[:error]
-            label.amount
-              span
-                | Amount: #{number_to_currency(@amount / 100.0)}
-          script.stripe-button data-amount="#{@amount}" data-description="#{@description}" data-key="#{Rails.configuration.stripe[:publishable_key]}" data-locale="auto" src="https://checkout.stripe.com/checkout.js" 
+h1 Your Order Details
+ul.list-group
+  - @items_in_cart.each do |product| 
+      li.list-group-item.justify-content-between
+        = product.name
+        span.badge.badge-default.badge-pill= number_to_currency(product.price)     
+hr/
+.row.text-right
+  .col-xs-2.col-xs-offset-8
+    p
+      strong
+        | Sub Total :
+        br/
+        | TAX :
+        br/
+        | Total :
+        br/
+  .col-xs-2
+    strong
+      = number_to_currency(@amount / 100.0) 
+      br/
+      | N/A
+      br/
+      | $1200.00
+      br/
+hr/
+= form_tag charges_path do
+  article
+    - if flash[:error].present?
+      #error_explanation
+        p= flash[:error]
+  script.stripe-button data-amount="#{@amount}" data-description="#{@description}" data-key="#{Rails.configuration.stripe[:publishable_key]}" data-locale="auto" src="https://checkout.stripe.com/checkout.js" 
+hr/
+= form_tag cart_url, method: 'get' do
+  = submit_tag "Back to cart", class: "btn btn-success"

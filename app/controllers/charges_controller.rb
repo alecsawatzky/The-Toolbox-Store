@@ -6,7 +6,7 @@ class ChargesController < ApplicationController
 
   def create
     # Amount in cents
-    @amount = 500
+    amount = 500
     @current_customer = current_customer
 
     logger.debug("get the customer. #{current_customer.inspect}")
@@ -34,6 +34,7 @@ class ChargesController < ApplicationController
 
     if @charge.paid && @charge.amount == amount
       # order = Order.create()
+
     end
   end
 
