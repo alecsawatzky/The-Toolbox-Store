@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'authentication/login'
+
+  get 'authentication/sign_up'
+
   resources :products, only: [:index] do
     member do
       post :add_to_cart
       post :edit_quantity
       get :cart
+      get :checkout
     end
   end
 
