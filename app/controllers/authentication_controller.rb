@@ -11,8 +11,9 @@ class AuthenticationController < ApplicationController
     logger.debug("The password. #{params[:password]}")
     if @customer.present?
       if @customer.password == params[:password]
-        redirect_to root_url
+        redirect_to cart_url
         session[:customer_id] = @customer.id
+        flash[:notice] = "Welcome back #{@customer.email}"
       else
         render :login
       end
