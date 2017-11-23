@@ -16,8 +16,18 @@ class ProductsController < ApplicationController
   end
 
   def checkout
+    @current_customer = current_customer
+    @province = @current_customer.province
+
     @items_in_cart = session[:cart].map{ |id| Product.find(id) }
-    @amount = @items_in_cart.sum(&:price) * 100
+    @subtotal = @items_in_cart.sum(&:price) * 100
+
+    @sales_pst = (@subtotal * @province.pst).round()
+    @sales_gst = (@subtotal * @province.gst).round()
+    @sales_hst = (@subtotal * @province.hst).round()
+
+    @grand_total = (@subtotal + (@sales_gst + @sales_pst + @sales_hst)).round()
+    session[:amount] = @grand_total
   end
 
   def sale
@@ -70,5 +80,9 @@ class ProductsController < ApplicationController
 
   def initialize_session
     session[:cart] ||= []
+  end
+
+  def current_customer
+    @current_customer ||= Customer.find_by(id: session[:customer_id])
   end
 end

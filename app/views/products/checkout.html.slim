@@ -11,17 +11,31 @@ hr/
       strong
         | Sub Total : 
         br/
-        | TAX : 
-        br/
+        - if @province.pst != 0
+          | PST : 
+          br/
+        - if @province.gst != 0
+          | GST : 
+          br/
+        - if @province.hst != 0
+          | HST : 
+          br/
         | Total : 
         br/
   .col-xs-2
     strong
-      = number_to_currency(@amount / 100.0) 
+      = number_to_currency(@subtotal / 100.0) 
       br/
-      | N/A
-      br/
-      | $1200.00
+      - if @province.pst != 0
+          = number_to_currency(@sales_pst / 100.0) 
+          br/
+      - if @province.gst != 0
+          = number_to_currency(@sales_gst / 100.0) 
+          br/
+      - if @province.hst != 0
+          = number_to_currency(@sales_hst / 100.0) 
+          br/
+      = number_to_currency(@grand_total / 100.0) 
       br/
 hr/
 = form_tag charges_path do
@@ -29,7 +43,7 @@ hr/
     - if flash[:error].present?
       #error_explanation
         p= flash[:error]
-  script.stripe-button data-amount="#{@amount}" data-description="#{@description}" data-key="#{Rails.configuration.stripe[:publishable_key]}" data-locale="auto" src="https://checkout.stripe.com/checkout.js" 
+  script.stripe-button data-amount="#{@grand_total}" data-description="#{@description}" data-key="#{Rails.configuration.stripe[:publishable_key]}" data-locale="auto" src="https://checkout.stripe.com/checkout.js" 
 hr/
 = form_tag cart_url, method: 'get' do
   = submit_tag "Back to cart", class: "btn btn-success"

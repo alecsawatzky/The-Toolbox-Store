@@ -1,12 +1,12 @@
 class ChargesController < ApplicationController
   def new
-    @amount = 500
+    @amount = session[:amount]
     @description = @customer.stripeBillingName
   end
 
   def create
     # Amount in cents
-    amount = 500
+    @amount = session[:amount]
     @current_customer = current_customer
 
     logger.debug("get the customer. #{current_customer.inspect}")
@@ -28,14 +28,14 @@ class ChargesController < ApplicationController
                                       description: 'Rails Stripe customer',
                                       currency: 'cad')
     end
+
+    if @charge.paid && @charge.amount == @amount
+      # order = Order.create()
+      session[:cart] = []
+    end
   rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path
-
-    if @charge.paid && @charge.amount == amount
-      # order = Order.create()
-
-    end
   end
 
   def current_customer
