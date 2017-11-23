@@ -1,7 +1,7 @@
 h1 Shopping Cart
 - if @items_in_cart.size > 0
   = form_tag checkout_product_path(@items_in_cart), class:"form-inline my-2 my-lg-0", method: 'get' do
-    = submit_tag "Chekout", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
+    = submit_tag "Checkout", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
   .card-columns
     - @items_in_cart.each do |product|
       .card
