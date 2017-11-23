@@ -16,15 +16,8 @@ class ProductsController < ApplicationController
   end
 
   def checkout
-    @items_in_cart = Product.find(session[:cart])
+    @items_in_cart = session[:cart].map{ |id| Product.find(id) }
     @amount = @items_in_cart.sum(&:price) * 100
-    
-
-
-    @product_id_list = session[:cart]
-    @product = Product.find(1)
-    
-    session[:province] = params[:province]
   end
 
   def sale
