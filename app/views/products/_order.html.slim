@@ -1,0 +1,40 @@
+h1 Your Order Details
+ul.list-group
+  - @items_in_cart.each do |product| 
+      li.list-group-item.justify-content-between
+        = product.name
+        span.badge.badge-default.badge-pill= number_to_currency(product.price)     
+hr/
+.row.text-right
+  .col-xs-2.col-xs-offset-8
+    p
+      strong
+        | Sub Total : 
+        br/
+        - if @province.pst != 0
+          | PST : 
+          br/
+        - if @province.gst != 0
+          | GST : 
+          br/
+        - if @province.hst != 0
+          | HST : 
+          br/
+        | Total : 
+        br/
+  .col-xs-2
+    strong
+      = number_to_currency(@subtotal / 100.0) 
+      br/
+      - if @province.pst != 0
+          = number_to_currency(@sales_pst / 100.0) 
+          br/
+      - if @province.gst != 0
+          = number_to_currency(@sales_gst / 100.0) 
+          br/
+      - if @province.hst != 0
+          = number_to_currency(@sales_hst / 100.0) 
+          br/
+      = number_to_currency(@grand_total / 100.0) 
+      br/
+hr/

@@ -13,20 +13,13 @@ class ProductsController < ApplicationController
   def cart
     @items_in_cart = Product.find(session[:cart])
     @product_id_list = session[:cart]
+    customer_details
   end
 
   def checkout
     @current_customer = current_customer
     @province = @current_customer.province
-
-    @items_in_cart = session[:cart].map{ |id| Product.find(id) }
-    @subtotal = @items_in_cart.sum(&:price) * 100
-
-    @sales_pst = (@subtotal * @province.pst).round()
-    @sales_gst = (@subtotal * @province.gst).round()
-    @sales_hst = (@subtotal * @province.hst).round()
-
-    @grand_total = (@subtotal + (@sales_gst + @sales_pst + @sales_hst)).round()
+    customer_details
     session[:amount] = @grand_total
   end
 
@@ -84,5 +77,20 @@ class ProductsController < ApplicationController
 
   def current_customer
     @current_customer ||= Customer.find_by(id: session[:customer_id])
+  end
+
+  def customer_details
+
+    @current_customer = current_customer
+    @province = @current_customer.province
+
+    @items_in_cart = session[:cart].map{ |id| Product.find(id) }
+    @subtotal = @items_in_cart.sum(&:price) * 100
+
+    @sales_pst = (@subtotal * @province.pst).round()
+    @sales_gst = (@subtotal * @province.gst).round()
+    @sales_hst = (@subtotal * @province.hst).round()
+
+    @grand_total = (@subtotal + (@sales_gst + @sales_pst + @sales_hst)).round()
   end
 end
