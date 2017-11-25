@@ -14,6 +14,8 @@ class ProductsController < ApplicationController
     customer_details
     @items_in_cart = Product.find(session[:cart])
     @product_id_list = session[:cart]
+
+    @sale_items = SaleProduct.find(session[:cart])
   end
 
   def checkout
@@ -81,6 +83,7 @@ class ProductsController < ApplicationController
     if customer_signed_in?
       @current_customer = current_customer
       @province = @current_customer.province
+      @email = @current_customer.email
       @pst = @province.pst
       @gst = @province.gst
       @hst = @province.hst
