@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   
-  before_action :initialize_session
+  before_action :initialize_session, :intialize_variables
 
   def index
     @products = Product.all
@@ -35,10 +35,12 @@ class ProductsController < ApplicationController
   end
 
   def search
-    if params[:filter].empty?
+    if params[:category].empty? && params[:search].empty?
       redirect_to action: "index"
+    elsif params[:category].empty?
+      @search_results = Product.where("name LIKE '%#{params[:search]}%'")
     else
-      @search_results = Product.where("name LIKE '%#{params[:search]}%' AND category_id == '#{params[:filter]}'")
+      @search_results = Product.where("name LIKE '%#{params[:search]}%' AND category_id == '#{params[:category]}'")
     end
   end
 
@@ -76,6 +78,10 @@ class ProductsController < ApplicationController
 
   def initialize_session
     session[:cart] ||= []
+  end
+
+  def intialize_variables
+    @sale_items = SaleProduct.all
   end
 
   def current_customer
