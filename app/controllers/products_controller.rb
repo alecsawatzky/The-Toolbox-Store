@@ -4,6 +4,7 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
+    @sale_items = SaleProduct.all
   end
 
   def show
@@ -15,7 +16,7 @@ class ProductsController < ApplicationController
     @items_in_cart = Product.find(session[:cart])
     @product_id_list = session[:cart]
 
-    @sale_items = SaleProduct.find(session[:cart])
+    @sale_items = SaleProduct.all
   end
 
   def checkout
@@ -29,6 +30,7 @@ class ProductsController < ApplicationController
 
   def new
     @new_items = Product.where(:new => true)
+    @sale_items = SaleProduct.all
   end
 
   def search

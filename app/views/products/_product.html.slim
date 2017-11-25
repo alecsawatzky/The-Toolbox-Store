@@ -3,6 +3,9 @@
     .card-body
       h4.card-title
         = product.name
+      -if @sale_items.find_by_id(product.id).present?
+          = @sale_items.find(product.id).discount_percent
+          |  % Off
     - if product.image.present?
       = image_tag product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
     .card-body
