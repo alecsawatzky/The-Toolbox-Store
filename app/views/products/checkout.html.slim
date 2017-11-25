@@ -1,6 +1,6 @@
 h1 Your Order Details
 ul.list-group
-  - @items_in_cart.each do |product| 
+  - @total_items_in_cart.each do |product| 
       li.list-group-item.justify-content-between
         = product.name
         span.badge.badge-default.badge-pill= number_to_currency(product.price)     

@@ -4,9 +4,17 @@ h1 Shopping Cart
     - path = checkout_product_path(@items_in_cart)
   - else
     - path = authentication_login_path
-  = form_tag path, class:"form-inline my-2 my-lg-0", method: 'get' do
-    = submit_tag "Checkout", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
-  .card-columns
+
+  br/
+  h5  Your Order
+  
+  .col-md-12.text-md-center
+    = render partial: 'order'
+  .d-flex.justify-content-between
+    = form_tag path, class:"form-inline my-2 my-lg-0", method: 'get' do
+     = submit_tag "Checkout", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
+
+  .card-deck
     - @items_in_cart.each do |product|
       .card
         .card-body
@@ -26,8 +34,6 @@ h1 Shopping Cart
                 = submit_tag :remove, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"-"
         = form_tag edit_quantity_product_path(product), class:"form-inline my-2 my-lg-0", method: 'post' do
             = submit_tag "Remove from cart", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
-  .sidebar-wrapper
-    = render partial: 'order'
 - else
   .alert.alert-info role="alert"  
     | Your cart is empty.
