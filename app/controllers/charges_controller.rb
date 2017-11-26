@@ -9,8 +9,6 @@ class ChargesController < ApplicationController
     @amount = session[:amount]
     current_customer
 
-    logger.debug("get the customer. #{current_customer.inspect}")
-
     if @current_customer.stripe_identifier.blank?
       @customer = Stripe::Customer.create(email: @current_customer.email,
                                           source: params[:stripeToken])
