@@ -62,6 +62,13 @@ class ChargesController < ApplicationController
 
   def add_line_item(order, product, quantity)
     line_item = order.line_items.build
+    price = product.price
+
+    if SaleProduct.find_by_id(product.id).present?
+      discount_decimal = (SaleProduct.find(product.id).discount_percent / 100) * price
+      price = price - discount_decimal
+      line_item.item_discount = discount_decimal
+    end
 
     line_item.product = product
     line_item.quantity = quantity
