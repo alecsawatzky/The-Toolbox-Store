@@ -3,5 +3,6 @@ h5
 h5
   | Your order total was: 
   strong= number_to_currency(@charge.amount / 100.0)
+hr/
 = form_tag root_url, method: 'get' do
   = submit_tag "Continue shopping", class: "btn btn-success"

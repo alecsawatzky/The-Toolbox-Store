@@ -3,7 +3,7 @@ require 'bcrypt'
 class Customer < ApplicationRecord
     has_many :orders
     belongs_to :province
-    validates :email, presence: true
+    validates :email, :province, :password_hash, presence: true
 
     include BCrypt
       def password
