@@ -27,21 +27,18 @@ class AuthenticationController < ApplicationController
   end
 
   def create
-    @province = Province.first
-
+    province = Province.find_by_id(params[:province])
+   
     @customer = Customer.new()
-
     @customer.email = params[:email]
     @customer.password = params[:password]
-    @customer.province_id = @province.id
-
-    logger.debug("Create the customer. #{@customer.inspect}")
+    @customer.province_id = province.id
 
     if @customer.save
       session[:customer_id] = @customer.id
       redirect_to cart_path
     else
-      render :sign_up
+        redirect_to authentication_sign_up_path
     end
   end
 end

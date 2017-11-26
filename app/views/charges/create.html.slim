@@ -1,7 +1,7 @@
 h5
   | Thank you for your purchase. Your order will ship momentarily.
 h5
-  | Your Total was: 
+  | Your order total was: 
   strong= number_to_currency(@charge.amount / 100.0)
 = form_tag root_url, method: 'get' do
   = submit_tag "Continue shopping", class: "btn btn-success"
