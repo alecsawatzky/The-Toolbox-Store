@@ -26,7 +26,8 @@ h1 Shopping Cart
           p.card_text
             = product.description
           p.card_text
-            | Price: $ #{product.price}
+            | Price: 
+            = number_to_currency(product.price)
           p.card_text
             | Order Quantity: #{@product_id_list.count(product.id)}
             = form_tag edit_quantity_product_path(product), method: 'post' do

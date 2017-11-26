@@ -19,7 +19,7 @@ h1 View Product
               = @sale_items.find(@product.id).discount_percent
               | %
             br/  
-            | $ #{@product.price}
+            = number_to_currency(@product.price)
           - if @product.stock_quantity > 0
             .product-stock In Stock
           -else
