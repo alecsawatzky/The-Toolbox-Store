@@ -1,5 +1,6 @@
-.catgory-dropdown
-  = form_tag filter_path, method: 'get' do
-    = select_tag :filter, options_from_collection_for_select(@category_list, 'id', 'name'), class: "form-control mr-sm-2"
-    = submit_tag :filter, class: "btn btn-outline-success my-2 my-sm-0",  name:"commit", value:"Filter"
-    = submit_tag :filter, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"Clear Filter"
+.container
+  .catgory-dropdown
+    = form_tag filter_path, method: 'get' do
+      = select_tag :filter, options_from_collection_for_select(@category_list, 'id', 'name'), class: "btn btn-secondary dropdown-toggle data-toggle=dropdown aria-haspopup=true aria-expanded=false"
+      = submit_tag :filter, class: "btn btn-outline-success my-2 my-sm-0",  name:"commit", value:"Filter"
+      = submit_tag :filter, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"Clear Filter"

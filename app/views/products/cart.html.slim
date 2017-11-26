@@ -32,9 +32,9 @@ h1 Shopping Cart
             = number_to_currency(product.price)
           p.card_text
             | Order Quantity: #{@product_id_list.count(product.id)}
-            = form_tag edit_quantity_product_path(product), method: 'post' do
-                = submit_tag :add, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"+"
-                = submit_tag :remove, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"-"
+          = form_tag edit_quantity_product_path(product), method: 'post' do
+              = submit_tag :add, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"+"
+              = submit_tag :remove, class: "btn btn-outline-success my-2 my-sm-2", name:"commit", value:"-"
         = form_tag edit_quantity_product_path(product), class:"form-inline my-2 my-lg-0", method: 'post' do
             = submit_tag "Remove from cart", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
 - else
