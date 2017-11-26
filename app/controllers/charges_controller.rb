@@ -48,13 +48,11 @@ class ChargesController < ApplicationController
 
   def create_order(customer)
     order = customer.orders.build
-
     order.status = "Paid"
     order.pst_rate = customer.province.pst
     order.gst_rate = customer.province.gst
     order.hst_rate = customer.province.hst
     order.save
-
     return order
   end
 

@@ -4,10 +4,8 @@ h1 Shopping Cart
     - path = checkout_product_path(@items_in_cart)
   - else
     - path = authentication_login_path
-
   br/
   h5  Your Order
-  
   .col-md-12.text-md-center
     = render partial: 'order'
     = form_tag path, class:"form-inline my-2 my-lg-0", method: 'get' do

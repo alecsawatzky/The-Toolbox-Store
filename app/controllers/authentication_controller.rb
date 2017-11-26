@@ -28,7 +28,6 @@ class AuthenticationController < ApplicationController
 
   def create
     province = Province.find_by_id(params[:province])
-   
     @customer = Customer.new()
     @customer.email = params[:email]
     @customer.password = params[:password]
@@ -38,7 +37,7 @@ class AuthenticationController < ApplicationController
       session[:customer_id] = @customer.id
       redirect_to cart_path
     else
-        redirect_to authentication_sign_up_path
+      redirect_to authentication_sign_up_path
     end
   end
 end
