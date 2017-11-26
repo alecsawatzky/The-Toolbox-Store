@@ -44,10 +44,4 @@ class AuthenticationController < ApplicationController
       render :sign_up
     end
   end
-
-  def destroy
-    cookies.delete(:customer_id)
-    redirect_to root_url
-  end
-
 end
