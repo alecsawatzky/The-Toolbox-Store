@@ -1,5 +1,5 @@
 h1 
-  = "Filtered Result".pluralize(@filter_results.size)
+  = @category.name.pluralize(@filter_results.size)
 = render partial: 'common/category_dropdown'
 - if @filter_results.empty?
   .alert.alert-info role="alert" 

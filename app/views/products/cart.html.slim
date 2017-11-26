@@ -10,10 +10,9 @@ h1 Shopping Cart
   
   .col-md-12.text-md-center
     = render partial: 'order'
-  .d-flex.justify-content-between
     = form_tag path, class:"form-inline my-2 my-lg-0", method: 'get' do
      = submit_tag "Checkout", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
-
+  hr/
   .card-deck
     - @items_in_cart.each do |product|
       .card

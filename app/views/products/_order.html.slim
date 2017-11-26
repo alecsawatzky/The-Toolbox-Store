@@ -14,11 +14,15 @@ hr/
         - if @hst != 0
           | HST : 
           br/
-        | Total : 
-        br/
+        - if @grand_total != 0
+          | Total : 
+          br/
+        - if @amount_saved != 0
+          | You Saved : 
+          br/
   .col-xs-2
     strong
-      = number_to_currency(@subtotal / 100.0) 
+      = number_to_currency(@subtotal / 100.0)
       br/
       - if @pst != 0
           = number_to_currency(@sales_pst / 100.0) 
@@ -29,6 +33,9 @@ hr/
       - if @hst != 0
           = number_to_currency(@sales_hst / 100.0) 
           br/
-      = number_to_currency(@grand_total / 100.0) 
-      br/
-hr/
+      - if @grand_total != 0
+        = number_to_currency(@grand_total / 100.0) 
+        br/
+      - if @amount_saved != 0
+        = number_to_currency(@amount_saved) 
+        br/
