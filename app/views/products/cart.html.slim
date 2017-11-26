@@ -9,7 +9,9 @@ h1 Shopping Cart
   .col-md-12.text-md-center
     = render partial: 'order'
     = form_tag path, class:"form-inline my-2 my-lg-0", method: 'get' do
-     = submit_tag "Checkout", class: "btn btn-outline-success my-2 my-sm-2", name:"commit"
+     = submit_tag "Checkout", class: "btn btn-success", name:"commit"
+    = form_tag root_url, method: 'get', class:"form-inline my-2 my-lg-0" do 
+      = submit_tag "Continue shopping", class: "btn btn-outline-success my-2 my-sm-2"
   hr/
   .card-deck
     - @items_in_cart.each do |product|
