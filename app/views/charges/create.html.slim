@@ -1,4 +1,9 @@
-h2
-  | Thank you for your purchase, you paid 
+h4
+  | Thank you for your purchase.
+h4
+  | Your order will ship momentarily.
+h4
+  | Your Total was: 
   strong= number_to_currency(@charge.amount / 100.0)
-    
+= form_tag root_url, method: 'get' do
+  = submit_tag "Continue shopping", class: "btn btn-success"
