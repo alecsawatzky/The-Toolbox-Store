@@ -1,17 +1,23 @@
 h1 
     = "Sale Product".pluralize(@sale_items.size)
-.card-columns
- - @sale_items.each do |item|
-    = link_to show_path(item.id)
-        .card
-            .card-body
-                h4.card-title
-                = item.product.name
-                h3.card_text
-                = item.discount_percent
-                |  % off
-            - if item.product.image.present?
-                = image_tag item.product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
-            .card-body
-                p.card_text
-                = item.product.description
+- if @sale_items.empty?
+  .alert.alert-info role="alert" 
+    strong Sorry! 
+    | There are currently no product sales or promotions.
+- else
+    .card-columns
+        - @sale_items.each do |item|
+            = link_to show_path(item.id)
+                .card
+                    .card-body
+                        h4.card-title
+                            = item.product.name
+                        h3.card_text
+                            = item.discount_percent
+                            |  % off
+                        - if item.product.image.present?
+                            = image_tag item.product.image.name, class: 'card-img-top img-fluid mx-auto d-block'
+                    .card-body
+                        p.card_text
+                            = item.product.description
+                            

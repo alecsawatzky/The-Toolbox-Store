@@ -1,4 +1,9 @@
 h1 
   = "New Product".pluralize(@new_items.size)
-.card-columns
-  = render @new_items
+- if @new_items.empty?
+  .alert.alert-info role="alert" 
+    strong Sorry! 
+    | There are currently no new products.
+- else
+  .card-columns
+    = render @new_items
